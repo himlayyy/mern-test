@@ -2,7 +2,12 @@ import { NavLink as Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Hotels from "./pages/Hotels/Hotels";
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faBed, faCar, faMountain, faPlane} from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
+library.add(faBed, faPlane, faCar, faMountain);
+
 
 
 function App() {
