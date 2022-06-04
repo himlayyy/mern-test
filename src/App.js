@@ -4,9 +4,9 @@ import Hotel from "./pages/Hotel/Hotel";
 import Hotels from "./pages/Hotels/Hotels";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faBed, faCar, faMountain, faPlane} from "@fortawesome/free-solid-svg-icons";
+import {faBed, faCalendarDays, faCar, faLocationPin, faMountain, faPerson, faPlane} from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
-library.add(faBed, faPlane, faCar, faMountain);
+library.add(faBed, faPlane, faCar, faMountain, faCalendarDays, faLocationPin, faPerson);
 
 
 
