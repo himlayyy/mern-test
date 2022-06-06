@@ -5,3 +5,7 @@
     align-items:center;
     gap:30px;
 }
+.homeTitle{
+    max-width:1024px;
+    font-size: 20px;
+}
