@@ -3,9 +3,9 @@ import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
 
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import {format} from "date-fns";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
 
 function Header() {
   const [date, setDate] = useState([
@@ -15,7 +15,12 @@ function Header() {
       key: "selection",
     },
   ]);
-  const [openDate, setOpenDate] = useState(false)
+  const [openDate, setOpenDate] = useState(false);
+  const [options, setOpenOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 0,
+  });
   return (
     <>
       <div className="header">
@@ -57,22 +62,59 @@ function Header() {
                 className="headerSearchInput"
               />
             </div>
-            <div className="headerSearchItem" onClick={()=> setOpenDate(!openDate)}>
+            <div
+              className="headerSearchItem"
+              onClick={() => setOpenDate(!openDate)}
+            >
               <FontAwesomeIcon icon={"calendar-days"} className="headerIcon" />
-              <span className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yy")} to {${format(date[0].endDate, "MM/dd/yy")}`}</span>
-              {openDate && <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setDate([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={date}
-                className="date"
-              />}
+              <span className="headerSearchText">{`${format(
+                date[0].startDate,
+                "MM/dd/yy"
+              )} to {${format(date[0].endDate, "MM/dd/yy")}`}</span>
+              {openDate && (
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={(item) => setDate([item.selection])}
+                  moveRangeOnFirstSelection={false}
+                  ranges={date}
+                  className="date"
+                />
+              )}
             </div>
             <div className="headerSearchItem">
               <FontAwesomeIcon icon={"person"} className="headerIcon" />
               <span className="headerSearchText">
-                2 adults 2 children 1 room
+                {`Adult ${options.adult} Children${options.children}`} Rooms $
+                {options.room}
               </span>
+              <div className="options">
+                <div className="optionItem">
+                  <span className="optionText">Adult</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton">-</button>
+                    <span className="optionCounterNumber">{options.adult}</span>
+                    <button className="optionCounterButton">+</button>
+                  </div>
+                </div>
+                <div className="optionItem">
+                  <span className="optionText">Children</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton">-</button>
+                    <span className="optionCounterNumber">
+                      {options.children}
+                    </span>
+                    <button className="optionCounterButton">+</button>
+                  </div>
+                </div>
+                <div className="optionItem">
+                  <span className="optionText">Rooms</span>
+                  <div className="optionCounter">
+                    <button className="optionCounterButton">-</button>
+                    <span className="optionCounterNumber">{options.room}</span>
+                    <button className="optionCounterButton">+</button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="headerSearchItem">
               <button className="headerBtn">Search</button>
