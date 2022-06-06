@@ -42,8 +42,10 @@ function PropertyList() {
         </div>
         <div className="pListItem">
             <img src="https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_cottages/5e1fd9cd716f4825c6c7eac5abe692c52cc64516.jpg" alt="Cottages" className="pListImg"/>
-            <h1>Cottages</h1>
-            <h2>123 Cottages</h2>
+            <div className="pListTitles">
+                <h1>Cottages</h1>
+                <h2>123 Cottages</h2>
+            </div>
         </div>
     </div>
   )
