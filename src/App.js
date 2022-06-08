@@ -4,11 +4,9 @@ import Hotel from "./pages/Hotel/Hotel";
 import Hotels from "./pages/Hotels/Hotels";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faBed, faCalendarDays, faCar, faLocationPin, faMountain, faPerson, faPlane} from "@fortawesome/free-solid-svg-icons";
+import {faArrowAltCircleLeft, faArrowAltCircleRight, faBed, faCalendarDays, faCar, faCircleXmark, faClose, faLocationDot, faLocationPin, faMountain, faPerson, faPlane} from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
-library.add(faBed, faPlane, faCar, faMountain, faCalendarDays, faLocationPin, faPerson);
-
-
+library.add(faBed, faPlane, faCar, faMountain, faCalendarDays, faLocationPin, faPerson, faLocationDot, faArrowAltCircleLeft, faArrowAltCircleRight, faCircleXmark);
 
 function App() {
   return (
