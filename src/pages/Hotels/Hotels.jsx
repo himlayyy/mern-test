@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./hotels.css";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
+import SearchItem from "../../components/SearchItem/SearchItem";
 
 function Hotels() {
   const location = useLocation();
@@ -84,8 +85,18 @@ function Hotels() {
               </div>
             </div>
             <button>Search</button>
+
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+          </div>
         </div>
       </div>
     </>
