@@ -16,10 +16,14 @@
     height:150px;
     object-fit: cover;
 }
+.pListTitles > *{
+    text-transform: capitalize;
+}
 .pListTitles>h1{
     font-size: 18px;
 }
 .pListTitles>h2{
     font-size: 14px;
     font-weight: 300;
+    
 }
