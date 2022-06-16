@@ -6,24 +6,24 @@ import "./hotels.css";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/SearchItem/SearchItem";
-// import { useFetch, reFetch } from "../../hooks/useFetch";
+// import { useFetch } from "../../hooks/useFetch.js";
 import useFetch from "../../hooks/useFetch";
 
 
 function Hotels() {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [dates, setDates] = useState(location.state.dates);
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
   const [openDate, setOpenDate] = useState(false);
 
-  const { data, loading, error } = useFetch(`/hotels?city=${destination}&min=${min ||0}&max=${max || 999}`);
+  const { data, loading, error, reFetch } = useFetch(`/hotels?city=${destination}&min=${min ||0}&max=${max || 999}`);
 
   const handleClick = () => {
-    useFetch.reFetch();
+    reFetch();
   };
   return (
     <>
@@ -40,14 +40,14 @@ function Hotels() {
             <div className="listItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                dates[0].startDate,
                 "MM/dd/yy"
-              )} to ${format(date[0].endDate, "MM/dd/yy")}`}</span>
+              )} to ${format(dates[0].endDate, "MM/dd/yy")}`}</span>
               {openDate && (
                 <DateRange
-                  onChange={(item) => setDate([item.selection])}
+                  onChange={(item) => setDates([item.selection])}
                   minDate={new Date()}
-                  ranges={date}
+                  ranges={dates}
                 />
               )}
             </div>
