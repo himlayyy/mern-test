@@ -2,10 +2,12 @@ import { NavLink as Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Hotels from "./pages/Hotels/Hotels";
+import Login from "./pages/Login/Login";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faArrowAltCircleLeft, faArrowAltCircleRight, faBed, faCalendarDays, faCar, faCircleXmark, faClose, faLocationDot, faLocationPin, faMountain, faPerson, faPlane} from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
+
 library.add(faBed, faPlane, faCar, faMountain, faCalendarDays, faLocationPin, faPerson, faLocationDot, faArrowAltCircleLeft, faArrowAltCircleRight, faCircleXmark);
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/hotels" element={<Hotels />}></Route>
           <Route path="/hotel/:id" element={<Hotel/>}></Route>
+         <Route path="/login" element={<Login/>}></Route>
         </Routes>
       </div>
     </>
