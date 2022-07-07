@@ -21,7 +21,7 @@ function Hotel() {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`/hotels/${path}`);
+  const { data, loading, error } = useFetch(`hotel/${path}`);
 
   // const photos = [
   //   {
