@@ -12,6 +12,7 @@ function SearchItem({item}) {
       />
       <div className="siDesc">
         <h3 className="siTitle">{item.title}</h3>
+        <h3>{item.city}</h3>
         <span className="siDistance">{item.distance}</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">

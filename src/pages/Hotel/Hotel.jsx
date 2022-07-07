@@ -6,8 +6,11 @@ import Navbar from "../../components/Navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./hotel.css";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/searchContext";
+import { AuthContext } from "../../context/authContext";
+import Reserve from "../../components/Reserve/Reserve";
+import { format, differenceInDays } from "date-fns";
 
 function Hotel() {
   const location = useLocation();
@@ -16,7 +19,9 @@ function Hotel() {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
-  const { data, loading, error } = useFetch(`/hotels/find/${path}`);
+  const [openModal, setOpenModal] = useState(false);
+
+  const { data, loading, error } = useFetch(`/hotels/${path}`);
 
   // const photos = [
   //   {
@@ -38,15 +43,28 @@ function Hotel() {
   //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/218285445.jpg?k=a678cce1a166864d0d42b901158633c3990aca12ff4ae59065eb604cd6bfd7f2&o=&hp=1",
   //   },
   // ];
+
   const { dates, options } = useContext(SearchContext);
-  console.log(dates);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  // function dayDifference(date1, date2) {
+  //   const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  //   const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+  //   return diffDays;
+  // }
+
   function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-    return diffDays;
+    console.log(date1, date2);
+    const days = differenceInDays(date1, date2);
+    console.log(days);
+    return days;
   }
+  // console.log(JSON.stringify(dates[0].startDate));
+  console.log(data);
+  console.log(dates);
+  // console.log(`Dates: ${dates[0]}`);
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
   console.log(options);
 
@@ -63,7 +81,15 @@ function Hotel() {
     }
     setSlideNumber(newSlideNumber);
   };
-  
+
+  const handleClick = () => {
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -137,9 +163,9 @@ function Hotel() {
                     for a two-person trip.
                   </span>
                   <h2>
-                    <b>${days * data.cheapestPrice * options.room}</b>({days}) 
+                    <b>${days * data.cheapestPrice * options.room}</b>({days})
                   </h2>
-                  <button>Reserve or Book Now!</button>
+                  <button onClick={handleClick}>Reserve or Book Now!</button>
                 </div>
               </div>
             </div>
@@ -148,6 +174,7 @@ function Hotel() {
           </div>
         </div>
       )}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={path} />}
     </div>
   );
 }
